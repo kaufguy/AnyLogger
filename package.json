@@ -1,7 +1,7 @@
 {
   "name": "any-logger",
   "version": "1.0.0",
-  "description": "Simple JS logging tools, that can be extended and modified to fit most of your logging needs.",
+  "description": "Simple JS log tools, that can be extended and modified to fit most of your logging needs.",
   "main": "Gruntfile.js",
   "directories": {
     "test": "test"
