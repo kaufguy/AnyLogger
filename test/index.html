@@ -1,0 +1,21 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+</head>
+<body>
+<div id="mocha"></div>
+<div id="testContainer"></div>
+
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/chai/chai.js"></script>
+
+<script>
+    mocha.setup('bdd');
+    mocha.reporter('html');
+</script>
+
+<script data-main="test.config.js" src="../node_modules/requirejs/require.js"></script>
+</body>
+</html>

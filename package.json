@@ -1,0 +1,38 @@
+{
+  "name": "any-logger",
+  "version": "1.0.0",
+  "description": "Simple JS logging tools, that can be extended and modified to fit most of your logging needs.",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "uglify-js": "^2.8.16",
+    "chai": "^3.5.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify": "^2.2.0",
+    "grunt-mocha-phantomjs": "^4.0.0",
+    "load-grunt-configs": "^1.0.0",
+    "load-grunt-tasks": "^3.5.2",
+    "mocha": "^3.2.0",
+    "time-grunt": "^1.4.0"
+  },
+  "scripts": {
+    "test": "grunt mocha_phantomjs"
+  },
+  "keywords": [
+    "log",
+    "simple",
+    "lightweight",
+    "modify",
+    "JavaScript",
+    "extend",
+    "html",
+    "console",
+    "capture"
+  ],
+  "author": "Guy Kaufman",
+  "license": "MIT"
+}
