@@ -16,4 +16,6 @@ module.exports = function (grunt) {
 
     // Define the configuration for all the tasks
     grunt.initConfig(configs);
+
+    grunt.registerTask('test', 'mocha_phantomjs');
 };
