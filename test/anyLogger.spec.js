@@ -184,7 +184,34 @@ define(['chai','src/anyLogger'], function(chai,logger) {
         });
 
 		describe('test capture console logs', function() {
-			it('captureLogs + collectConsoleLogs + dumpArray of console logs', function(){
+            it('dont collect logs twice', function(){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    collectConsoleLogs: true,
+                    captureLogs: true
+                });
+                loggerInst.error('hello world');
+                expect(loggerInst.getCapturedLogs().length).to.equal(1);
+            });
+            it('capture logs limit', function(){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    collectConsoleLogs: true,
+                    captureLogs: true,
+					captureLogsLimit: 2
+                });
+                expect(loggerInst.getCapturedLogs().length).to.equal(0);
+                console.debug('hello world');
+                expect(loggerInst.getCapturedLogs().length).to.equal(1);
+                loggerInst.error('hello world');
+                expect(loggerInst.getCapturedLogs().length).to.equal(1);
+                loggerInst.captureLogsLimit(3);
+                loggerInst.debug('hello world');
+                expect(loggerInst.getCapturedLogs().length).to.equal(2);
+            });
+			it('captureLogs + collectConsoleLogs + getCapturedLogs + flushCapturedLogs', function(done){
 				var loggerInst;
 				loggerInst = logger.create({
 					logLevel: 'debug',
@@ -196,12 +223,33 @@ define(['chai','src/anyLogger'], function(chai,logger) {
 				console.info('hello world');
 				console.warn('hello world');
 				console.error('hello world');
-				expect(loggerInst.dumpArray()[0].message === 'hello world').to.equal(true);
-				expect(loggerInst.dumpArray()[1].message === 'hello world').to.equal(true);
-				expect(loggerInst.dumpArray()[2].message === 'hello world').to.equal(true);
-				expect(loggerInst.dumpArray()[3].message === 'hello world').to.equal(true);
-				expect(loggerInst.dumpArray()[4].message === 'hello world').to.equal(true);
+                loggerInst.error('hello world');
+				expect(loggerInst.getCapturedLogs()[0].message === 'hello world').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[1].message === 'hello world').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[2].message === 'hello world').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[3].message === 'hello world').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[4].message === 'hello world').to.equal(true);
+               	loggerInst.flushCapturedLogs( 'error' ,['console', 'html'],function(count){
+                   expect(count).to.equal(2);
+                   expect(loggerInst.getCapturedLogs().length).to.equal(0);
+                   done();
+			   	});
 			});
+            it('flushCapturedLogsOnLimit', function(){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    flushCapturedLogsOnLimit: {handlerTypes:['console'], logLevel: 'info'},
+                    captureLogs: true,
+                    captureLogsLimit: 3
+                });
+                loggerInst.debug('hello world');
+                loggerInst.info('hello world');
+                expect(loggerInst.getCapturedLogs().length).to.equal(2);
+                loggerInst.error('hello world');
+                expect(loggerInst.getCapturedLogs().length).to.equal(0);
+
+            });
 		});
 
 
