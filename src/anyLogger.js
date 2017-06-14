@@ -57,6 +57,128 @@
         };
     };
 
+    // CreateServiceHandler returns an ajax log service handler object;
+    var createServiceHandler = function (initSettings) {
+        var _settings = {};
+        var _logRows = [];
+        var _interval;
+        var _sentCount = 0;
+
+        if (!initSettings || !initSettings.loggingUrl)
+        {
+            return;
+        }
+
+        var init = function (initSettings) {
+            if (!initSettings.headers)
+            {
+                _settings.headers = [consts.defaultServiceHeaders];
+            }
+            else if (initSettings.headers instanceof Array)
+            {
+                _settings.headers = initSettings.headers;
+            }
+            else {
+                _settings.headers = [initSettings.headers];
+            }
+
+            if (initSettings.timeframe != undefined)
+            {
+                _settings.sendBy = 'timeframe';
+                if (initSettings.timeframe > consts.minTimeframe)
+                {
+                    _settings.timeframe = initSettings.timeframe;
+                }
+                else {
+                    _settings.timeframe = consts.minTimeframe;
+                }
+            }
+            else {
+                _settings.sendBy = 'batchSize';
+            }
+            _settings.timeframe = _settings.timeframe * 60 * 1000; // convert to milliseconds
+
+            _settings.loggingUrl = initSettings.loggingUrl;
+            _settings.batchSize = initSettings.batchSize || consts.defaultBatchSize;
+            _settings.timeout = initSettings.timeout || consts.defaultTimeout;
+            _settings.requestParser = initSettings.requestParser;
+
+            if (_settings.sendBy === 'timeframe')
+            {
+                _interval = setInterval(flush, _settings.timeframe, false);
+            }
+        }
+
+        var writeRow = function(module, scope, message, level, date)
+        {
+            _logRows.push({
+                message: message,
+                level: level.name,
+                module: module,
+                scope: scope,
+                date: date
+            });
+            if (_settings.sendBy === 'batchSize')
+            {
+                if (_logRows.length >= _settings.batchSize) {
+                    send(_logRows);
+                }
+            }
+        };
+
+        var send = function(logRows) {
+            if (logRows.length < 1)
+            {
+                return;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', _settings.loggingUrl, true);
+
+            _settings.headers.forEach(function(header){
+                xhr.setRequestHeader(
+                    Object.keys(header)[0],
+                    header[Object.keys(header)[0]]
+                );
+            });
+
+            var data;
+            if (_settings.requestParser)
+            {
+                data = JSON.stringify(_settings.requestParser(logRows));
+            }
+            else
+            {
+                data = JSON.stringify(logRows);
+            }
+            xhr.send(data);
+            _logRows = [];
+            _sentCount++;
+        };
+
+        var flush = function()
+        {
+            send(_logRows);
+        }
+
+        var destroy = function()
+        {
+            clearInterval(_interval);
+        };
+
+        init(initSettings);
+
+        return {
+            type: 'service',
+            write: function(message, level, data) {
+                writeRow(data.module, data.scope, message, level, data.date)
+            },
+            flush: flush,
+            rowsCount: function(){return _logRows.length;},
+            sentCount: function(){return _sentCount;},
+            destroy: destroy
+        };
+    };
+
     var createHtmlHandler = function(settings)
     {
         var logContainer;
@@ -388,7 +510,7 @@
 
             logTable = document.createElement('table');
             logTable.id = "logTable";
-            logTable.innerHTML = '<thead class="log-table-header"><tr><th>Order</th><th>Module</th><th>Scope</th><th style="width:100%;">Message</th><th>Level</th></tr></thead><tbody class="log-table-body"></tbody>'
+            logTable.innerHTML = '<thead class="log-table-header"><tr><th>Order</th><th>Date</th><th>Module</th><th>Scope</th><th style="width:100%;">Message</th><th>Level</th></tr></thead><tbody class="log-table-body"></tbody>'
             logContainer.appendChild(logTable);
             logBody = logTable.tBodies[0];
             sortable = createSortable();
@@ -410,11 +532,11 @@
             return '';
         }
 
-        var drawTableRow = function(module, scope, message, level)
+        var drawTableRow = function(module, scope, message, level, date)
         {
             var newRow = logBody.insertRow(-1);
             newRow.className = 'log-table-row';
-            newRow.innerHTML = '<td>' + order + '</td><td>' + parseNotUndefined(module) + '</td><td>' + parseNotUndefined(scope) + '</td><td>' + message + '</td><td>' + level.name + '</td>';
+            newRow.innerHTML = '<td>' + order + '</td><td>' + date.toLocaleString() + '</td><td>' + parseNotUndefined(module) + '</td><td>' + parseNotUndefined(scope) + '</td><td>' + message + '</td><td>' + level.name + '</td>';
             order++;
         }
 
@@ -435,7 +557,7 @@
         return {
             type: 'html',
             write: function(message, level, data) {
-                drawTableRow(data.module, data.scope, message, level)
+                drawTableRow(data.module, data.scope, message, level, data.date)
             },
             sort: sortTable,
             filter: filterTable,
@@ -482,6 +604,10 @@
         if (config.logToHtml)
         {
             this.handlers.push(createHtmlHandler({container: config.logToHtml.container}));
+        }
+        if (config.logToService)
+        {
+            this.handlers.push(createServiceHandler(config.logToService));
         }
         if (config.formatter)
         {
@@ -786,6 +912,10 @@
     consts.defaultLogLevel = consts.logLevels.OFF;
     consts.defaultFlushLogLevel = consts.logLevels.DEBUG;
     consts.defaultCaptureLogsLimit = 1000;
+    consts.defaultServiceHeaders = { 'Content-Type' : 'application/json' };
+    consts.defaultTimeout = 2000;
+    consts.defaultBatchSize = 1000;
+    consts.minTimeframe = 0.1; //min of 6 sec for each send request
 
     return {
         create: create,

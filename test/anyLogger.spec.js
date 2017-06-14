@@ -280,7 +280,7 @@ define(['chai','src/anyLogger'], function(chai,logger) {
 				});
 				loggerInst.debug('hello world', {scope: 'worldScope'});
 				loggerInst.debug('hello world', {scope: 'helloScope'});
-				loggerInst.getHandlerByType('html').sort(2);
+				loggerInst.getHandlerByType('html').sort(3);
 				expect(testContainer.getElementsByTagName('tbody')[0].rows[0].innerHTML.indexOf('helloScope') > -1).to.equal(true);
 			});
 			it('logger table should filter hello', function(){
@@ -320,6 +320,66 @@ define(['chai','src/anyLogger'], function(chai,logger) {
 				expect(testContainer.getElementsByTagName('tbody')[0].rows[0].innerHTML.indexOf('hello') > -1).to.equal(true);
 			});
 		});
+/*        describe('test service logging ', function() {
+            it('logger should log in debug level "hello world" to service + batchSize', function(){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    logToConsole: false,
+                    module: 'custom',
+                    logToService: {
+                        loggingUrl: 'http://www.testlog.com',
+                        batchSize: 1,
+                        headers: [{"Content-Type": "application/json"}, {"Authorization": "5067b6e8-f0276"}],
+                    }
+                });
+                loggerInst.debug('hello world', {scope: 'helloScope'});
+                expect(loggerInst.getHandlerByType('service').sentCount()).to.equal(1);
+                expect(loggerInst.getHandlerByType('service').rowsCount()).to.equal(0);
+            });
+            it('logger should log in debug level "hello world" to service + parser + timeframe', function(done){
+                this.slow();
+                this.timeout(6500);
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    logToConsole: false,
+                    module: 'custom',
+                    logToService: {
+                        loggingUrl: 'http://www.testlog.com',
+                        timeframe: 0.1,
+                        headers: [{"Content-Type": "application/json"}, {"Authorization": "5067b6e8-f0276"}],
+						requestParser: function (logRows) {
+							var logRowsOut = [];
+							logRows.forEach(function (row) {
+								logRowsOut.push({
+									type: "LogRow",
+									message: row.message,
+									level: row.level,
+									scope: row.scope,
+									module: row.module
+								});
+							})
+							return {
+								"entities": [{
+									"type": "Log",
+									"revision": "1_0_0",
+									"context": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+									"logRows": logRowsOut
+								}]
+							}
+						}
+					}
+                });
+                loggerInst.debug('hello world', {scope: 'helloScope'});
+                expect(loggerInst.getHandlerByType('service').rowsCount()).to.equal(1);
+                setTimeout(function(){
+                    loggerInst.getHandlerByType('service').destroy();
+                	expect(loggerInst.getHandlerByType('service').sentCount()).to.equal(1);
+                    expect(loggerInst.getHandlerByType('service').rowsCount()).to.equal(0);
+                	done();}, 6100);
+            });
+        });*/
     });
 
 });
