@@ -3,7 +3,7 @@
  */
 
 
-define(['chai','src/anyLogger'], function(chai,logger) {
+define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
     describe('AnyLogger Test', function() {
 
         var expect = chai.expect;
@@ -320,7 +320,15 @@ define(['chai','src/anyLogger'], function(chai,logger) {
 				expect(testContainer.getElementsByTagName('tbody')[0].rows[0].innerHTML.indexOf('hello') > -1).to.equal(true);
 			});
 		});
-/*        describe('test service logging ', function() {
+        describe('test service logging ', function() {
+        	before(function()
+			{
+                this.xhr = sinon.useFakeXMLHttpRequest();
+			});
+            after(function()
+            {
+                this.xhr.restore();
+            });
             it('logger should log in debug level "hello world" to service + batchSize', function(){
                 var loggerInst;
                 loggerInst = logger.create({
@@ -379,7 +387,7 @@ define(['chai','src/anyLogger'], function(chai,logger) {
                     expect(loggerInst.getHandlerByType('service').rowsCount()).to.equal(0);
                 	done();}, 6100);
             });
-        });*/
+        });
     });
 
 });
