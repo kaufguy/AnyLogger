@@ -329,7 +329,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
             {
                 this.xhr.restore();
             });
-            it('logger should log in debug level "hello world" to service + batchSize', function(){
+            it('logger should log in debug level "hello world" to service + batchSize + flushOnWindowClose', function(){
                 var loggerInst;
                 loggerInst = logger.create({
                     logLevel: 'debug',
@@ -338,6 +338,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
                     logToService: {
                         loggingUrl: 'http://www.testlog.com',
                         batchSize: 1,
+                        flushOnWindowClose: true,
                         headers: [{"Content-Type": "application/json"}, {"Authorization": "5067b6e8-f0276"}],
                     }
                 });

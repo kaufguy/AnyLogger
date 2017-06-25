@@ -96,8 +96,12 @@
             else {
                 _settings.sendBy = 'batchSize';
             }
-            _settings.timeframe = _settings.timeframe * 60 * 1000; // convert to milliseconds
 
+            if (initSettings.flushOnWindowClose)
+            {
+                flushOnWindowClose();
+            }
+            _settings.timeframe = _settings.timeframe * 60 * 1000; // convert to milliseconds
             _settings.loggingUrl = initSettings.loggingUrl;
             _settings.batchSize = initSettings.batchSize || consts.defaultBatchSize;
             _settings.timeout = initSettings.timeout || consts.defaultTimeout;
@@ -164,6 +168,13 @@
         {
             clearInterval(_interval);
         };
+
+        var flushOnWindowClose = function()
+        {
+            window.onbeforeunload = function () {
+                flush();
+            };
+        }
 
         init(initSettings);
 
