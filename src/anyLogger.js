@@ -23,6 +23,9 @@
             if (data.module) {
                 message = "[" + data.module + "]" + message;
             }
+            if (data.date) {
+                message = "[" + data.date.toISOString() + "]" + message;
+            }
         }
         return message;
     };
@@ -97,7 +100,7 @@
                 _settings.sendBy = 'batchSize';
             }
 
-            if (initSettings.flushOnWindowClose)
+            if (initSettings.flushOnWindowClose || initSettings.flushOnWindowClose=== undefined)
             {
                 flushOnWindowClose();
             }
@@ -590,6 +593,7 @@
                 this.captureLogsLimit(config.captureLogsLimit);
             };
             this.flushCapturedLogsOnLimit(config.flushCapturedLogsOnLimit);
+            this.flushOnError(config.flushOnError);
             this.captureLogs(true);
         }
         if (config.handlers)
@@ -623,7 +627,8 @@
         if (config.formatter)
         {
             this.formatter = config.formatter;
-        } else if (config.useFormatter != false) {
+        }
+        else if (config.useFormatter != false) {
             this.formatter = defaultMessageFormatter;
         }
         if (config.logLevel)
@@ -662,17 +667,21 @@
     prototype.captureLogs = function(capture)
     {
         this.settings.captureLogs = capture;
-    }
+    };
 
     prototype.captureLogsLimit = function(limit)
     {
         this.settings.captureLogsLimit = limit;
-    }
+    };
 
     prototype.flushCapturedLogsOnLimit = function(flushCapturedLogsOnLimit)
     {
         this.settings.flushCapturedLogsOnLimit = flushCapturedLogsOnLimit;
-    }
+    };
+
+    prototype.flushOnError = function (flushOnError) {
+        this.settings.flushOnError = flushOnError;
+    };
 
     prototype.debug = function (message, data, cb) {
         return this.trigger(message, consts.logLevels.DEBUG, data, cb);
@@ -701,26 +710,34 @@
     prototype.trigger = function (message, level, data, cb) {
         if (this.settings.captureLogs)
         {
-            this.capturedLogs.push({
-                message: message,
-                level: level,
-                data: data
-            });
-            if (this.capturedLogs.length >= this.settings.captureLogsLimit)
+            if (this.settings.flushOnError && level.value >= consts.logLevels.ERROR.value)
             {
-                if (this.settings.flushCapturedLogsOnLimit)
+                this.flushCapturedLogs(this.settings.flushOnError.logLevel, this.settings.flushOnError.handlerTypes);
+            }
+            else
+            {
+                this.capturedLogs.push({
+                    message: message,
+                    level: level,
+                    data: data
+                });
+                if (this.capturedLogs.length >= this.settings.captureLogsLimit)
                 {
-                    this.flushCapturedLogs(this.settings.flushCapturedLogsOnLimit.logLevel, this.settings.flushCapturedLogsOnLimit.handlerTypes);
-                }
-                else {
-                    this.capturedLogs.shift();
+                    if (this.settings.flushCapturedLogsOnLimit)
+                    {
+                        this.flushCapturedLogs(this.settings.flushCapturedLogsOnLimit.logLevel, this.settings.flushCapturedLogsOnLimit.handlerTypes);
+                    }
+                    else {
+                        this.capturedLogs.shift();
+                    }
                 }
             }
+
         }
         if (message && enabledFor.call(this,level))
         {
             var parsedData = data || {};
-            parsedData.module = this.settings.module;
+            parsedData.module = parsedData.module || this.settings.module;
             parsedData.date = new Date();
             if (this.formatter && !isCollected(data)) //don't format collected message
             {
@@ -730,7 +747,7 @@
                 this.handlers.forEach(function(handler)
                 {
                     if (!isCollected(data) || handler.type != 'console') { //don't log to console messages that were collected from there.
-                        write(handler, message, level, data, cb);
+                        write(handler, message, level, parsedData, cb);
                     }
                 });
             }

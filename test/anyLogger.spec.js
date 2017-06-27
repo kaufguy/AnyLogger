@@ -140,7 +140,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 					logLevel: 'debug'
 				});
 				loggerInst.debug('hello world');
-                expect(storeDebug.indexOf('hello world') > -1).to.equal(true);
+                expect(storeDebug[0].indexOf('hello world') > -1).to.equal(true);
             });
 			it('logger should log with scope in debug level "[scopeWorld]hello" to the console', function(){
 				var loggerInst;
@@ -148,7 +148,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 					logLevel: 'debug'
 				});
 				loggerInst.debug('hello', {scope:'scopeWorld'});
-				expect(storeDebug.indexOf('[scopeWorld]hello') > -1).to.equal(true);
+				expect(storeDebug[1].indexOf('[scopeWorld]hello') > -1).to.equal(true);
 			});
 			it('logger should log in warn level with formatter "[hello]world" to the console', function(){
 				var loggerInst;
@@ -157,7 +157,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 					module: 'hello'
 				});
 				loggerInst.warn('world');
-				expect(storeWarn.indexOf('[hello]world') > -1).to.equal(true);
+				expect(storeWarn[0].indexOf('[hello]world') > -1).to.equal(true);
 			});
 			it('logger should not log in warn level when trying to log debug', function(){
 				var loggerInst;
@@ -165,7 +165,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 					logLevel: 'warn',
 				});
 				loggerInst.debug('noLog');
-				expect(storeWarn.indexOf('noLog') === -1).to.equal(true);
+				expect(storeWarn.length === 1).to.equal(true);
 			});
 			it('log when configured formatter and handler', function(){
 				var loggerInst;
@@ -177,7 +177,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 				});
 				loggerInst.warn('hello world');
 				expect(storeWarn.indexOf('hello world ! custom') === -1).to.equal(true);
-				expect(storeDebug.indexOf('hello world ! custom') === -1).to.equal(true);
+				expect(storeDebug[2].indexOf('hello world ! custom') === -1).to.equal(true);
 			});
 
 
@@ -250,6 +250,20 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
                 expect(loggerInst.getCapturedLogs().length).to.equal(0);
 
             });
+            it('flushOnError', function(){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'error',
+                    flushOnError: {handlerTypes:['console'], logLevel: 'debug'},
+                    captureLogs: true,
+                });
+                loggerInst.debug('hello world1');
+                loggerInst.info('hello world2');
+                expect(loggerInst.getCapturedLogs().length).to.equal(2);
+                loggerInst.error('hello world3');
+                expect(loggerInst.getCapturedLogs().length).to.equal(0);
+
+            });
 		});
 
 
@@ -259,6 +273,17 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 				testContainer.innerHTML = '';
 				done();
 			});
+            it('logger should log in debug level "hello world" to HTML without data', function(){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    logToConsole: false,
+                    module: 'custom',
+                    logToHtml: {container: testContainer},
+                });
+                loggerInst.debug('hello world');
+                expect(testContainer.innerHTML.indexOf('hello world') > -1).to.equal(true);
+            });
 			it('logger should log in debug level "hello world" to HTML', function(){
 				var loggerInst;
 				loggerInst = logger.create({
