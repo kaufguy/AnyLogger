@@ -643,9 +643,9 @@
         {
             this.settings.module = config.module;
         }
-        if (config.collectConsoleLogs)
+        if (config.collect)
         {
-            collectConsoleLogs.call(this);
+            collect.call(this);
         }
     };
 
@@ -831,7 +831,7 @@
         }
 	}
 
-    var collectConsoleLogs = function() {
+    var collect = function() {
         var self = this;
         if (console.log) {
             var oldLog = console.log;
@@ -896,6 +896,9 @@
                 }
                 oldError.apply(console, arguments);
             }
+        }
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            self.trigger(msg, consts.logLevels.ERROR, {collected: true});
         }
     }
 

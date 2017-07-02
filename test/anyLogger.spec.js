@@ -188,7 +188,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
                 var loggerInst;
                 loggerInst = logger.create({
                     logLevel: 'debug',
-                    collectConsoleLogs: true,
+                    collect: true,
                     captureLogs: true
                 });
                 loggerInst.error('hello world');
@@ -198,7 +198,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
                 var loggerInst;
                 loggerInst = logger.create({
                     logLevel: 'debug',
-                    collectConsoleLogs: true,
+                    collect: true,
                     captureLogs: true,
 					captureLogsLimit: 2
                 });
@@ -211,11 +211,11 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
                 loggerInst.debug('hello world');
                 expect(loggerInst.getCapturedLogs().length).to.equal(2);
             });
-			it('captureLogs + collectConsoleLogs + getCapturedLogs + flushCapturedLogs', function(done){
+			it('captureLogs + collect + getCapturedLogs + flushCapturedLogs', function(done){
 				var loggerInst;
 				loggerInst = logger.create({
 					logLevel: 'debug',
-					collectConsoleLogs: true,
+					collect: true,
 					captureLogs: true
 				});
 				console.debug('hello world');
@@ -338,7 +338,7 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 				var loggerInst;
 				loggerInst = logger.create({
 					logLevel: 'debug',
-					collectConsoleLogs: true,
+					collect: true,
 					logToHtml: {container: testContainer},
 				});
 				console.debug('hello world');
