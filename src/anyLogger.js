@@ -908,7 +908,7 @@
             {
                 message.push('Stack: ' + error.stack);
             }
-            message.join(' - ');
+            message = message.join(' - ');
             self.trigger(message, consts.logLevels.ERROR, {collected: true});
         }
     }
