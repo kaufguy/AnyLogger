@@ -898,7 +898,18 @@
             }
         }
         window.onerror = function (msg, url, lineNo, columnNo, error) {
-            self.trigger(msg, consts.logLevels.ERROR, {collected: true});
+            var message = [
+                'Message: ' + msg,
+                'URL: ' + url,
+                'Line: ' + lineNo,
+                'Column: ' + columnNo
+            ];
+            if (error && error.stack)
+            {
+                message.push('Stack: ' + error.stack);
+            }
+            message.join(' - ');
+            self.trigger(message, consts.logLevels.ERROR, {collected: true});
         }
     }
 
