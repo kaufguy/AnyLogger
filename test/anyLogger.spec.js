@@ -230,17 +230,18 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 					collect: true,
 					captureLogs: true
 				});
-				console.debug('hello world');
-				console.log('hello world');
-				console.info('hello world');
-				console.warn('hello world');
-				console.error('hello world');
-                loggerInst.error('hello world');
-				expect(loggerInst.getCapturedLogs()[0].message === 'hello world').to.equal(true);
-				expect(loggerInst.getCapturedLogs()[1].message === 'hello world').to.equal(true);
-				expect(loggerInst.getCapturedLogs()[2].message === 'hello world').to.equal(true);
-				expect(loggerInst.getCapturedLogs()[3].message === 'hello world').to.equal(true);
-				expect(loggerInst.getCapturedLogs()[4].message === 'hello world').to.equal(true);
+				console.debug('hello world1');
+				console.log('hello world2');
+				console.info('hello world3');
+				console.warn('hello world4');
+				console.error('hello world5');
+                loggerInst.error('hello world6', {module:'module1', scope:'scope1'});
+				expect(loggerInst.getCapturedLogs()[0].message === 'hello world1').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[1].message === 'hello world2').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[2].message === 'hello world3').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[3].message === 'hello world4').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[4].message === 'hello world5').to.equal(true);
+                expect(loggerInst.getCapturedLogs()[5].message.indexOf('[module1][scope1]hello world6') > -1).to.equal(true);
                	loggerInst.flushCapturedLogs( 'error' ,['console', 'html'],function(count){
                    expect(count).to.equal(2);
                    expect(loggerInst.getCapturedLogs().length).to.equal(0);

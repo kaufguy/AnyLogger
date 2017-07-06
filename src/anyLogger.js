@@ -681,6 +681,16 @@
     };
 
     prototype.trigger = function (message, level, data, cb) {
+        var parsedData;
+        if (message) {
+            parsedData = data || {};
+            parsedData.module = parsedData.module || this.settings.module;
+            parsedData.date = new Date();
+            if (this.formatter && !isCollected(data)) //don't format collected message
+            {
+                message = this.formatter(message, parsedData);
+            }
+        }
         if (this.settings.captureLogs)
         {
             if (this.settings.flushOnError && level.value >= consts.logLevels.ERROR.value)
@@ -707,15 +717,8 @@
             }
 
         }
-        if (message && enabledFor.call(this,level))
+        if (enabledFor.call(this,level))
         {
-            var parsedData = data || {};
-            parsedData.module = parsedData.module || this.settings.module;
-            parsedData.date = new Date();
-            if (this.formatter && !isCollected(data)) //don't format collected message
-            {
-                message = this.formatter(message, parsedData);
-            }
             if (this.handlers && this.handlers.constructor === Array) {
                 this.handlers.forEach(function(handler)
                 {
