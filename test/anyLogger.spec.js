@@ -119,6 +119,18 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 			});
 		});
 
+        describe('test API ', function() {
+            it('addHandlers', function(){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+					logToConsole: false
+                });
+                loggerInst.addHandlers({logToConsole: true, logToHtml: {container: testContainer}});
+                expect(loggerInst.getHandlerTypes().length === 2).to.equal(true);
+            });
+        });
+
         describe('test console logging', function() {
 			var storeDebug = [];
 			var storeWarn = [];

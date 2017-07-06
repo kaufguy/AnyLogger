@@ -596,34 +596,7 @@
             this.flushOnError(config.flushOnError);
             this.captureLogs(true);
         }
-        if (config.handlers)
-        {
-            if (config.handlers.constructor === Array) {
-                config.handlers.forEach(function(handler)
-                {
-                    if (typeof handler === 'function')
-                    {
-                        this.handlers.push({type: 'custom', write: handler});
-                    }
-                    else {
-                        this.handlers.push(handler);
-                    }
-                }.bind(this));
-
-            }
-        }
-        if (config.logToConsole != false)
-        {
-            this.handlers.push(createConsoleHandler());
-        }
-        if (config.logToHtml)
-        {
-            this.handlers.push(createHtmlHandler({container: config.logToHtml.container}));
-        }
-        if (config.logToService)
-        {
-            this.handlers.push(createServiceHandler(config.logToService));
-        }
+        this.addHandlers(config);
         if (config.formatter)
         {
             this.formatter = config.formatter;
@@ -633,7 +606,7 @@
         }
         if (config.logLevel)
         {
-            this.logLevel(config.logLevel.toUpperCase());
+            this.logLevel(config.logLevel);
         }
         else
         {
@@ -653,15 +626,15 @@
 
     // Changes the instance logging level and returns the logging level.
     prototype.logLevel = function (newLevel) {
-        if (typeof newLevel === 'string' && newLevel in consts.logLevels) //case string as an input
+        if (typeof newLevel === 'string' && newLevel.toUpperCase() in consts.logLevels) //case string as an input
         {
-            this.settings.logLevel = consts.logLevels[newLevel];
+            this.settings.logLevel = consts.logLevels[newLevel.toUpperCase()];
         }
         else if (newLevel && newLevel.name in consts.logLevels) //case object as an input
         {
             this.settings.logLevel = consts.logLevels[newLevel.name];
         }
-        return this.settings.logLevel.name;
+        return this.settings.logLevel ? this.settings.logLevel.name : null;
     };
 
     prototype.captureLogs = function(capture)
@@ -811,6 +784,38 @@
         	return handler.type;
         });
     };
+
+    prototype.addHandlers = function(config)
+    {
+        if (config.handlers)
+        {
+            if (config.handlers.constructor === Array) {
+                config.handlers.forEach(function(handler)
+                {
+                    if (typeof handler === 'function')
+                    {
+                        this.handlers.push({type: 'custom', write: handler});
+                    }
+                    else {
+                        this.handlers.push(handler);
+                    }
+                }.bind(this));
+
+            }
+        }
+        if (config.logToConsole != false)
+        {
+            this.handlers.push(createConsoleHandler());
+        }
+        if (config.logToHtml)
+        {
+            this.handlers.push(createHtmlHandler({container: config.logToHtml.container}));
+        }
+        if (config.logToService)
+        {
+            this.handlers.push(createServiceHandler(config.logToService));
+        }
+    }
 
     var write = function(handler, message, level, data, cb)
 	{
