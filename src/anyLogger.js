@@ -7,7 +7,7 @@
     } else if (typeof exports === 'object') {
         module.exports = factory();
     } else {
-        root.YourModule = factory();
+        root.AnyLogger = factory();
     }
 
 }(this, function () {
