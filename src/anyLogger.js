@@ -702,7 +702,7 @@
                 this.capturedLogs.push({
                     message: message,
                     level: level,
-                    data: data
+                    data: parsedData
                 });
                 if (this.capturedLogs.length >= this.settings.captureLogsLimit)
                 {

@@ -236,14 +236,16 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 				console.warn('hello world4');
 				console.error('hello world5');
                 loggerInst.error('hello world6', {module:'module1', scope:'scope1'});
+                loggerInst.error('hello world7');
 				expect(loggerInst.getCapturedLogs()[0].message === 'hello world1').to.equal(true);
 				expect(loggerInst.getCapturedLogs()[1].message === 'hello world2').to.equal(true);
 				expect(loggerInst.getCapturedLogs()[2].message === 'hello world3').to.equal(true);
 				expect(loggerInst.getCapturedLogs()[3].message === 'hello world4').to.equal(true);
 				expect(loggerInst.getCapturedLogs()[4].message === 'hello world5').to.equal(true);
                 expect(loggerInst.getCapturedLogs()[5].message.indexOf('[module1][scope1]hello world6') > -1).to.equal(true);
+                expect(loggerInst.getCapturedLogs()[6].message.indexOf('hello world7') > -1).to.equal(true);
                	loggerInst.flushCapturedLogs( 'error' ,['console', 'html'],function(count){
-                   expect(count).to.equal(2);
+                   expect(count).to.equal(3);
                    expect(loggerInst.getCapturedLogs().length).to.equal(0);
                    done();
 			   	});
@@ -357,6 +359,26 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 				console.debug('hello world');
 				expect(testContainer.getElementsByTagName('tbody')[0].rows[0].innerHTML.indexOf('hello') > -1).to.equal(true);
 			});
+            it('log to HTML flushCapturedLogs', function(done){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    collect: true,
+                    captureLogs: true,
+                    logToHtml: {container: testContainer}
+                });
+                console.error('hello world1');
+                loggerInst.error('hello world2', {module:'module1', scope:'scope1'});
+                loggerInst.error('hello world3');
+                expect(loggerInst.getCapturedLogs()[0].message === 'hello world1').to.equal(true);
+                expect(loggerInst.getCapturedLogs()[1].message.indexOf('[module1][scope1]hello world2') > -1).to.equal(true);
+                expect(loggerInst.getCapturedLogs()[2].message.indexOf('hello world3') > -1).to.equal(true);
+                loggerInst.flushCapturedLogs( 'error' ,['html'],function(count){
+                    expect(count).to.equal(3);
+                    expect(loggerInst.getCapturedLogs().length).to.equal(0);
+                    done();
+                });
+            });
 		});
         describe('test service logging ', function() {
         	before(function()
