@@ -495,7 +495,7 @@
             var tableStyle = document.createElement('style');
             logContainer.appendChild(tableStyle);
             tableStyle.innerHTML =
-                "#logTable{border-collapse: collapse; height: 100%; width: 100%; display: block; overflow: auto;}" +
+                "#logTable{border-collapse: collapse; height: 100%; width: 100%; display: block;}" +
                 ".log-table-row td{border: 1px solid black;} " +
                 ".log-table-row:nth-child(even){background-color: #d3d3d3}" +
                 ".log-table-row:hover {background-color: #ffffe0}" +
