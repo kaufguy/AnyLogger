@@ -593,7 +593,7 @@
                 this.captureLogsLimit(config.captureLogsLimit);
             };
             this.flushCapturedLogsOnLimit(config.flushCapturedLogsOnLimit);
-            this.flushOnError(config.flushOnError);
+            this.flushCapturedLogsOnError(config.flushCapturedLogsOnError);
             this.captureLogs(true);
         }
         this.addHandlers(config);
@@ -652,8 +652,8 @@
         this.settings.flushCapturedLogsOnLimit = flushCapturedLogsOnLimit;
     };
 
-    prototype.flushOnError = function (flushOnError) {
-        this.settings.flushOnError = flushOnError;
+    prototype.flushCapturedLogsOnError = function (flushCapturedLogsOnError) {
+        this.settings.flushCapturedLogsOnError = flushCapturedLogsOnError;
     };
 
     prototype.debug = function (message, data, cb) {
@@ -693,9 +693,9 @@
         }
         if (this.settings.captureLogs)
         {
-            if (this.settings.flushOnError && level.value >= consts.logLevels.ERROR.value)
+            if (this.settings.flushCapturedLogsOnError && level.value >= consts.logLevels.ERROR.value)
             {
-                this.flushCapturedLogs(this.settings.flushOnError.logLevel, this.settings.flushOnError.handlerTypes);
+                this.flushCapturedLogs(this.settings.flushCapturedLogsOnError.logLevel, this.settings.flushCapturedLogsOnError.handlerTypes);
             }
             else
             {

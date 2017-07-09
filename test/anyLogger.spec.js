@@ -265,11 +265,11 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
                 expect(loggerInst.getCapturedLogs().length).to.equal(0);
 
             });
-            it('flushOnError', function(){
+            it('flushCapturedLogsOnError', function(){
                 var loggerInst;
                 loggerInst = logger.create({
                     logLevel: 'error',
-                    flushOnError: {handlerTypes:['console'], logLevel: 'debug'},
+                    flushCapturedLogsOnError: {handlerTypes:['console'], logLevel: 'debug'},
                     captureLogs: true,
                 });
                 loggerInst.debug('hello world1');
