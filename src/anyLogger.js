@@ -45,13 +45,6 @@
                         handler = console.info;
                     } else if (level === consts.logLevels.DEBUG && console.debug) {
                         handler = console.debug;
-                    } else if (level === consts.logLevels.TIME && console.time && console.timeEnd) {
-                        if (typeof message === 'string') {
-                            handler = console.time;
-                        }
-                        else {
-                            handler = console.timeEnd;
-                        }
                     }
                     if (handler) {
                         handler.call(console, message, {noCollect: true});
@@ -672,24 +665,14 @@
         return this.trigger(message, consts.logLevels.ERROR, data, cb);
     };
 
-    prototype.time = function (message, data, cb) {
-        return this.trigger(message, consts.logLevels.TIME, data, cb);
-    };
-
-    prototype.timeEnd = function (message, data, cb) {
-        return this.trigger([ message, 'end' ], consts.logLevels.TIME, data, cb);
-    };
-
     prototype.trigger = function (message, level, data, cb) {
         var parsedData;
-        if (message) {
-            parsedData = data || {};
-            parsedData.module = parsedData.module || this.settings.module;
-            parsedData.date = new Date();
-            if (this.formatter && !isCollected(data)) //don't format collected message
-            {
-                message = this.formatter(message, parsedData);
-            }
+        parsedData = data || {};
+        parsedData.module = parsedData.module || this.settings.module;
+        parsedData.date = new Date();
+        if (message && this.formatter && !isCollected(data)) //don't format collected message
+        {
+            message = this.formatter(message, parsedData);
         }
         if (this.settings.captureLogs)
         {
@@ -868,24 +851,6 @@
                 oldInfo.apply(console, arguments);
             }
         }
-        if (console.time) {
-            var oldTime = console.time;
-            console.time = function (message, data) {
-                if (!data || !data.noCollect) {
-                    self.trigger(message, consts.logLevels.TIME, {collected: true});
-                }
-                oldTime.apply(console, arguments);
-            }
-        }
-        if (console.timeEnd) {
-            var oldTimeEnd = console.timeEnd;
-            console.timeEnd = function (message, data) {
-                if (!data || !data.noCollect) {
-                    self.trigger(message, consts.logLevels.TIME, {collected: true});
-                }
-                oldTimeEnd.apply(console, arguments);
-            }
-        }
         if (console.warn)
         {
             var oldWarn = console.warn;
@@ -954,7 +919,6 @@
     consts.logLevels = {};
     consts.logLevels.DEBUG = {value: 1, name: 'DEBUG'};
     consts.logLevels.INFO = {value: 2, name: 'INFO'};
-    consts.logLevels.TIME = {value: 3, name: 'TIME'};
     consts.logLevels.WARN = {value: 4, name: 'WARN'};
     consts.logLevels.ERROR = {value: 5, name: 'ERROR'};
     consts.logLevels.FATAL = {value: 9, name: 'FATAL'};
