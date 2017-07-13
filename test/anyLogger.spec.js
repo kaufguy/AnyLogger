@@ -359,6 +359,16 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 				console.debug('hello world');
 				expect(testContainer.getElementsByTagName('tbody')[0].rows[0].innerHTML.indexOf('hello') > -1).to.equal(true);
 			});
+            it('log to HTML no message captured log', function(){
+                var loggerInst;
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    collect: true,
+                    logToHtml: {container: testContainer},
+                });
+                console.debug();
+                expect(testContainer.getElementsByTagName('tbody')[0].rows.length === 1).to.equal(true);
+            });
             it('log to HTML flushCapturedLogs', function(done){
                 var loggerInst;
                 loggerInst = logger.create({

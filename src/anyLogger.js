@@ -543,7 +543,7 @@
         {
             var newRow = logBody.insertRow(-1);
             newRow.className = 'log-table-row';
-            newRow.innerHTML = '<td>' + order + '</td><td>' + date.toLocaleString() + '</td><td>' + parseNotUndefined(module) + '</td><td>' + parseNotUndefined(scope) + '</td><td>' + message + '</td><td>' + level.name + '</td>';
+            newRow.innerHTML = '<td>' + order + '</td><td>' + date.toLocaleString() + '</td><td>' + parseNotUndefined(module) + '</td><td>' + parseNotUndefined(scope) + '</td><td>' + parseNotUndefined(message) + '</td><td>' + level.name + '</td>';
             order++;
         }
 
