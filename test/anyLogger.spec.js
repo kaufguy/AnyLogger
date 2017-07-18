@@ -3,10 +3,19 @@
  */
 
 
-define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
+define(['chai', 'sinon', '../dev/anyLoggerMax.js'], function(chai, sinon, logger) {
     describe('AnyLogger Test', function() {
 
         var expect = chai.expect;
+        var logger;
+        if (logger) {
+
+        } else {
+            // optimized file -- 2nd request yields a Require module
+            require(['anyLoggerMax'], function (loggerI) {
+                logger = loggerI;
+            });
+        }
 
 		describe('test logger instance', function() {
 			it('logger instance should exist', function(){
@@ -120,14 +129,32 @@ define(['chai', 'sinon', 'src/anyLogger'], function(chai, sinon, logger) {
 		});
 
         describe('test API ', function() {
-            it('addHandlers', function(){
+            it('addHandler', function(){
                 var loggerInst;
                 loggerInst = logger.create({
                     logLevel: 'debug',
 					logToConsole: false
                 });
-                loggerInst.addHandlers({logToConsole: true, logToHtml: {container: testContainer}});
+                loggerInst.addHandler({logToConsole: true, logToHtml: {container: testContainer}});
+                loggerInst.addHandler({logToConsole: true, logToHtml: {container: testContainer}});
                 expect(loggerInst.getHandlerTypes().length === 2).to.equal(true);
+            });
+            it('addPlugin', function(done) {
+                var loggerInst;
+
+                var createPlugin = function (anyLogger, settings) {
+                	if (!settings.logToPlugin)
+					{
+						return;
+					}
+                    done();
+				}
+                logger.addPlugin({create: createPlugin});
+                loggerInst = logger.create({
+                    logLevel: 'debug',
+                    logToConsole: false,
+                    logToPlugin: true
+                });
             });
         });
 

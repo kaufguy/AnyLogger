@@ -11,12 +11,13 @@
     "uglify-js": "^2.8.16"
   },
   "devDependencies": {
+    "chai": "*",
     "grunt": "^1.0.1",
+    "grunt-contrib-requirejs": "^1.0.0",
     "grunt-contrib-uglify": "^2.2.0",
     "grunt-mocha-phantomjs": "^4.0.0",
     "load-grunt-configs": "^1.0.0",
     "load-grunt-tasks": "^3.5.2",
-    "chai": "*",
     "mocha": "*",
     "sinon": "*",
     "time-grunt": "^1.4.0"

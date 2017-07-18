@@ -392,10 +392,6 @@
 
     var addPlugin = function(plugin)
     {
-        if (!plugin || typeof plugin.create != 'function')
-        {
-            return;
-        }
         plugins.push(plugin);
     }
 
