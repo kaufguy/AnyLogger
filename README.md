@@ -17,7 +17,7 @@ Next, AnyLogger is ready to crate a logger instance and start logging. It comes 
 ```html
 <html>
   <body>
-    <script type="text/javascript" src="../anyLogger.js"></script>
+    <script type="text/javascript" src="./anyLogger.js"></script>
     <script type="text/javascript">
       var loggerInst = AnyLogger.create();
       loggerInst.debug('hello world');
