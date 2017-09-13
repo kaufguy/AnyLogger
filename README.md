@@ -65,7 +65,6 @@ Check out demoLight and demoMax to see AnyLogger in action.
     
 ## API - Instance
 
-## Logging
 ### loggerInst.debug(message, data)
 ### loggerInst.info(message, data)
 ### loggerInst.warn(message, data)
@@ -76,7 +75,7 @@ Check out demoLight and demoMax to see AnyLogger in action.
 
   * #### Parameters
     message - string messege
-    data - (optional) object that can contain the properties 'module and 'scope'. 
+    data - (optional) object that can contain the properties 'module' and 'scope'. 
 
 ### loggerInst.logLevel(level)
 
@@ -93,3 +92,27 @@ Check out demoLight and demoMax to see AnyLogger in action.
 
   * #### Parameters
     capture - boolean value. 
+
+### AnyLogger.captureLogsLimit(limit)
+
+  * #### Description
+    set the limit of how many captured logs to store.
+
+  * #### Parameters
+    limit - integer value. 
+    
+### AnyLogger.flushCapturedLogsOnLimit(flushOnLimit)
+
+  * #### Description
+    configures if to flush all the captured logs when it reaches the limit.
+
+  * #### Parameters
+    flushOnLimit - object that contains the properties 'logLevel': the minimum level of logs you want to flush and 'handlerTypes': which     handlers you want to log to.    
+    
+### AnyLogger.flushCapturedLogsOnError(flushOnError)
+
+  * #### Description
+    configures if to flush all the captured logs, when an error level is logged. This is useful if you only interested in investigating     errors and need extended data of the logs that could guid to that error.
+
+  * #### Parameters
+    flushOnError - object that contains the properties 'logLevel': the minimum level of logs you want to flush and 'handlerTypes': which     handlers you want to log to.
