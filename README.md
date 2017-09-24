@@ -42,8 +42,7 @@ AnyLogger.create(settings);
 | flushCapturedLogsOnLimit | {handlerTypes:[''],logLevel:''}         | configure if to                                                                                                                        [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the                                                                        captured logs, when it reaches the limit          |
 | logToConsole             | boolean                                 | configure if to use the console handler or not          |
 | logToHtml (Max only)     | {container:''}                          | configure if to use the HTML handler (available only on AnyLoggerMax) or not and which HTML container to use |
-| logToService (Max only)  | {loggingUrl:'',batchSize:integer,flushOnWindowClose:boolean,headers: [{'':''}]}                                                                                                  | configure if to use Service handler (available only on
-                                                                     AnyLoggerMax) or not and set it's configuration |
+| logToService (Max only)  | {loggingUrl:'', batchSize:integer,                                                                                                    flushOnWindowClose:boolean,                                                                                                              headers: [{'':''}]}                       | configure if to use Service handler (available only on                                                                                AnyLoggerMax) or not and set it's configuration |
 
 ## Demo
 Check out demoLight and demoMax to see AnyLogger in action.
