@@ -104,7 +104,7 @@ Check out demoLight and demoMax to see AnyLogger in action.
 ### AnyLogger.flushCapturedLogsOnLimit(flushOnLimit)
 
   * #### Description
-    configures if to [flush](flushCapturedLogs) all the captured logs when it reaches the limit.
+    configures if to [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the captured logs when it reaches the limit.
 
   * #### Parameters
     flushOnLimit - object that contains the properties 'logLevel': the minimum level of logs you want to flush and 'handlerTypes': which     handlers you want to log to.    
@@ -112,7 +112,7 @@ Check out demoLight and demoMax to see AnyLogger in action.
 ### AnyLogger.flushCapturedLogsOnError(flushOnError)
 
   * #### Description
-    configures if to [flush](flushCapturedLogs) all the captured logs, when an error level is logged. This is useful if you only interested in investigating errors and need extended data of the logs that could guid to that error.
+    configures if to [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the captured logs, when an error level is logged. This is useful if you only interested in investigating errors and need extended data of the logs that could guid to that error.
 
   * #### Parameters
     flushOnError - object that contains the properties 'logLevel': the minimum level of logs you want to flush and 'handlerTypes': which     handlers you want to log to.
