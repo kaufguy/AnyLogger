@@ -41,20 +41,20 @@ Check out demoLight and demoMax to see AnyLogger in action.
 ## API
 ### AnyLogger.create(settingsObj)
 
-    Returns AnyLogger instance to start logging.
+Returns AnyLogger instance to start logging.
   * #### Parameters
     settingsObj - (optional) setup [Settings](#settings) object.
 
 ### AnyLogger.getLoggerById(id)
 
-    retrieves AnyLogger instance by id. 
+retrieves AnyLogger instance by id. 
 
   * #### Parameters
     id - id of the instance. 
 
 ### AnyLogger.addPlugin(plugin)
 
-    registers a plugin class. 
+registers a plugin class. 
 
   * #### Parameters
     plugin - plugin object with create function. 
@@ -66,7 +66,7 @@ Check out demoLight and demoMax to see AnyLogger in action.
 ### loggerInst.warn(message, data)
 ### loggerInst.error(message, data)
 
-    Logs the provided message with formatting and handling according to the data.
+Logs the provided message with formatting and handling according to the data.
 
   * #### Parameters
     message - string messege
@@ -74,46 +74,46 @@ Check out demoLight and demoMax to see AnyLogger in action.
 
 ### loggerInst.logLevel(level)
 
-    Sets the logging level. Returns the log level.
+Sets the logging level. Returns the log level.
 
   * #### Parameters
     level - (optional) logLevel string or object.
 
 ### AnyLogger.captureLogs(capture)
 
-    turn log capture on / off.
+turn log capture on / off.
 
   * #### Parameters
     capture - boolean value. 
 
 ### AnyLogger.captureLogsLimit(limit)
 
-    set the limit of how many captured logs to store.
+set the limit of how many captured logs to store.
 
   * #### Parameters
     limit - integer value. 
     
 ### AnyLogger.flushCapturedLogsOnLimit(flushOnLimit)
 
-    configures if to [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the captured logs when it reaches the limit.
+configures if to [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the captured logs when it reaches the limit.
 
   * #### Parameters
     flushOnLimit - object that contains the properties 'logLevel': the minimum level of logs you want to flush and 'handlerTypes': which     handlers you want to log to.    
     
 ### AnyLogger.flushCapturedLogsOnError(flushOnError)
 
-    configures if to [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the captured logs, when an error level is logged. This is useful if you only interested in investigating errors and need extended data of the logs that could guid to that error.
+configures if to [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the captured logs, when an error level is logged. This is useful if you only interested in investigating errors and need extended data of the logs that could guid to that error.
 
   * #### Parameters
     flushOnError - object that contains the properties 'logLevel': the minimum level of logs you want to flush and 'handlerTypes': which     handlers you want to log to.
     
 ### AnyLogger.getCapturedLogs()
 
-    return the captured logs.
+return the captured logs.
     
 ### AnyLogger.flushCapturedLogs(logLevel, handlerTypes)
 
-    flush all the captured logs.
+flush all the captured logs.
     
   * #### Parameters
     logLevel- the minimum level of logs you want to flush.
@@ -121,7 +121,7 @@ Check out demoLight and demoMax to see AnyLogger in action.
     
 ### AnyLogger.addHandler(handler)
 
-    adds an handler to log messages to.
+adds an handler to log messages to.
     
   * #### Parameters
     handler- object that contains the properties 'type': string of the handler type(name) and 'write': function that recieves a string message, log level and data(#parameters-3).
