@@ -53,7 +53,7 @@ Check out demoLight and demoMax to see AnyLogger in action.
 Formatter is a simple function that recieves a string message and data object as input. It returns a formatted string message that will be used as an input message to the handlers(#handlers). All non collected messages are routed through the formatter. AnyLogger comes with a default formatter that can be disabled with 'useFormatter' configuration.
 
 ## Handlers
-Handlers are objects which provides a 'write' function that receives a string message, log level and data(#parameters-3). According to configuration, log messages are routed through the handlers so they can do some logging work with them. Handlers can provide their own API that would be available when retriving their instance through getHandlerByType (#getHandlerByType). AnyLogger comes with one default 'console' handler and AnyLoggerMax also comes with 'html' and 'service' handlers. 
+Handlers are objects which provides a 'write' function that receives a string message, log level and data(#parameters-3). According to configuration, log messages are routed through the handlers so they can do some logging work with them. Handlers can provide their own API that would be available when retriving their instance through getHandlerByType (#anyloggergethandlerbytypetype). AnyLogger comes with one default 'console' handler and AnyLoggerMax also comes with 'html' and 'service' handlers. You can provide your own custom handler and set it with addHandler(#anyloggeraddHandler).
 
 ## API
 ### AnyLogger.create(settingsObj)
