@@ -47,7 +47,6 @@ Check out demoLight and demoMax to see AnyLogger in action.
 
 ### AnyLogger.getLoggerById(id)
 
-Description
     retrieves AnyLogger instance by id. 
 
   * #### Parameters
@@ -55,7 +54,6 @@ Description
 
 ### AnyLogger.addPlugin(plugin)
 
-  * #### Description
     registers a plugin class. 
 
   * #### Parameters
@@ -68,7 +66,6 @@ Description
 ### loggerInst.warn(message, data)
 ### loggerInst.error(message, data)
 
-  * #### Description
     Logs the provided message with formatting and handling according to the data.
 
   * #### Parameters
@@ -77,7 +74,6 @@ Description
 
 ### loggerInst.logLevel(level)
 
-  * #### Description
     Sets the logging level. Returns the log level.
 
   * #### Parameters
@@ -85,7 +81,6 @@ Description
 
 ### AnyLogger.captureLogs(capture)
 
-  * #### Description
     turn log capture on / off.
 
   * #### Parameters
@@ -93,7 +88,6 @@ Description
 
 ### AnyLogger.captureLogsLimit(limit)
 
-  * #### Description
     set the limit of how many captured logs to store.
 
   * #### Parameters
@@ -101,7 +95,6 @@ Description
     
 ### AnyLogger.flushCapturedLogsOnLimit(flushOnLimit)
 
-  * #### Description
     configures if to [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the captured logs when it reaches the limit.
 
   * #### Parameters
@@ -109,7 +102,6 @@ Description
     
 ### AnyLogger.flushCapturedLogsOnError(flushOnError)
 
-  * #### Description
     configures if to [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the captured logs, when an error level is logged. This is useful if you only interested in investigating errors and need extended data of the logs that could guid to that error.
 
   * #### Parameters
@@ -117,12 +109,10 @@ Description
     
 ### AnyLogger.getCapturedLogs()
 
-  * #### Description
     return the captured logs.
     
 ### AnyLogger.flushCapturedLogs(logLevel, handlerTypes)
 
-  * #### Description
     flush all the captured logs.
     
   * #### Parameters
@@ -131,7 +121,6 @@ Description
     
 ### AnyLogger.addHandler(handler)
 
-  * #### Description
     adds an handler to log messages to.
     
   * #### Parameters
