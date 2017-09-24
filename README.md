@@ -35,7 +35,7 @@ AnyLogger.create(settings);
 | ------------------------ | ----------------------------------------| --------------------------------------------------|
 | logLevel                 | 'debug', 'info', 'warn', 'error', 'off' | set the log level from which you want to see logs |
 | module                   | string                                  | set the module for the log messages               |
-| formatter(#Formatter)    | function                                | function that recieves a string message and a data object                                                                              and returns a formatted string message              |
+| formatter(#formatter)    | function                                | function that recieves a string message and a data object                                                                              and returns a formatted string message              |
 | useFormatter             | boolean                                 | configure if to use the deafult formatter in case no custom                                                                            formatter was set                                   |
 | collect                  | boolean                                 | configure if to collect global errors and console logs  |
 | captureLogs              | boolean                                 | configure if to capture logs or not                     |
@@ -50,10 +50,10 @@ AnyLogger.create(settings);
 Check out demoLight and demoMax to see AnyLogger in action.
 
 ## Formatter
-Formatter is a simple function that recieves a string message and data object as input. It returns a formatted string message that will be used as an input message to the handlers(#Handlers). All non collected messages are routed through the formatter. AnyLogger comes with a default formatter that can be disabled with 'useFormatter' configuration.
+Formatter is a simple function that recieves a string message and data object as input. It returns a formatted string message that will be used as an input message to the handlers(#handlers). All non collected messages are routed through the formatter. AnyLogger comes with a default formatter that can be disabled with 'useFormatter' configuration.
 
 ## Handlers
-Handlers are objects that provide a 'write' function that receives a string message, log level and data(#parameters-3). According to configuration, log messages are routed through the handlers so they can do some logging work with them.
+Handlers are objects which provides a 'write' function that receives a string message, log level and data(#parameters-3). According to configuration, log messages are routed through the handlers so they can do some logging work with them. Handlers can provide their own API that would be available when retriving their instance through getHandlerByType (#getHandlerByType). AnyLogger comes with one default 'console' handler and AnyLoggerMax also comes with 'html' and 'service' handlers. 
 
 ## API
 ### AnyLogger.create(settingsObj)
@@ -142,3 +142,11 @@ adds an handler to log messages to.
     
   * #### Parameters
     handler- object that contains the properties 'type': string of the handler type(name) and 'write': function that recieves a string message, log level and data(#parameters-3).
+    
+### AnyLogger.getHandlerByType(type)
+
+return an handler instance by it's type.
+    
+  * #### Parameters
+    type- string of an handler type.
+
