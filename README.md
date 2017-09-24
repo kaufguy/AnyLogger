@@ -41,15 +41,13 @@ Check out demoLight and demoMax to see AnyLogger in action.
 ## API
 ### AnyLogger.create(settingsObj)
 
-  * #### Description
     Returns AnyLogger instance to start logging.
-
   * #### Parameters
     settingsObj - (optional) setup [Settings](#settings) object.
 
 ### AnyLogger.getLoggerById(id)
 
-  * #### Description
+Description
     retrieves AnyLogger instance by id. 
 
   * #### Parameters
@@ -137,4 +135,4 @@ Check out demoLight and demoMax to see AnyLogger in action.
     adds an handler to log messages to.
     
   * #### Parameters
-    handler- object that contains the properties 'type': string of the handler type(name) and 'write': function that recieves a message, level and data.
+    handler- object that contains the properties 'type': string of the handler type(name) and 'write': function that recieves a string message, log level and data(#parameters-3).
