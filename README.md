@@ -129,4 +129,12 @@ Check out demoLight and demoMax to see AnyLogger in action.
     
   * #### Parameters
     logLevel- the minimum level of logs you want to flush.
-    handlerTypes- which handlers you want to log to.
+    handlerTypes- array of handler types you want to log to.
+    
+### AnyLogger.addHandler(handler)
+
+  * #### Description
+    adds an handler to log messages to.
+    
+  * #### Parameters
+    handler- object that contains the properties 'type': string of the handler type(name) and 'write': function that recieves a message, level and data.
