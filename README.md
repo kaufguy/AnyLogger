@@ -31,9 +31,16 @@ AnyLogger accept setup settings in the 'create' call. Most of the settings can b
 ```javascript
 AnyLogger.create(settings);
 ```
-| Setting                  | Values                                  | Description                                       |    
+| Setting                  | Value                                   | Description                                       |    
 | ------------------------ | ----------------------------------------| --------------------------------------------------|
 | logLevel                 | 'debug', 'info', 'warn', 'error', 'off' | set the log level from which you want to see logs |
+| module                   | string                                  | set the module for the log messages               |
+| collect                  | boolean                                 | configure if to collect global errors and console logs  |
+| captureLogs              | boolean                                 | configure if to capture logs or not                     |
+| captureLogsLimit         | integer                                 | set the limit of how many captured logs to store  |
+| flushCapturedLogsOnError | {handlerTypes:[''], logLevel: ''}       | configure if to                                                                                                                        [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the                                                                        captured logs, when an error level is logged      |
+| flushCapturedLogsOnLimit | {handlerTypes:[''], logLevel: ''}       | configure if to                                                                                                                        [flush](#anyloggerflushcapturedlogsloglevel-handlertypes) all the                                                                        captured logs, when it reaches the limit          |
+| logToConsole             | boolean                                 | configure if to use the console handler or not          |
 
 ## Demo
 Check out demoLight and demoMax to see AnyLogger in action.
