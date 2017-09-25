@@ -11,7 +11,7 @@ Simple JavaScript log tools, that can be extended and modified to fit most of yo
 * [Global Log Collecting](#global-log-collecting)
 * [Formatter](#formatter)
 * [Handlers](#handlers)
-* Plugins
+* [Plugins](#plugins)
 
 ## Table of Contents
 
@@ -24,6 +24,7 @@ Simple JavaScript log tools, that can be extended and modified to fit most of yo
 * [Global Log Collecting](#global-log-collecting)
 * [Formatter](#formatter)
 * [Handlers](#handlers)
+* [Plugins](#plugins)
 * [API](#api)
 
 ## Quick Start
@@ -49,6 +50,7 @@ AnyLogger.create(settings);
 ```
 | Setting                  | Value                                   | Description                                       |    
 | ------------------------ | ----------------------------------------| --------------------------------------------------|
+| id                       | string                                  | logger instance id 
 | logLevel                 | 'debug', 'info', 'warn', 'error', 'off' | set the log level from which you want to see logs |
 | module                   | string                                  | set the module for the log messages               |
 | [formatter](#formatter)  | function                                | function that recieves a string message and a data object                                                                              and returns a formatted string message              |
@@ -72,7 +74,7 @@ Default handler that logs messages to the console
 ## HTML Logging
 Handler that logs to an HTML table that can be filtered, sorted and cleared. Very useful for mobile devices. only available in AnyLoggerMax.
 
-## Servie Logging
+## Service Logging
 Handler that logs to a server through an HTTP request. You can configure the service URL, request headers, batch size of the logs on each request and if to flush the remaining logs on window close event. Very useful for production monitoring. only available in AnyLoggerMax.
 
 ## Global Log Collecting
@@ -105,7 +107,11 @@ loggerInst.addHandler({
 ```
 ## Plugins
 Plugins are module objects, which provides a 'create' function that recieves the AnyLogger class and the provided settings. Plugins can manipulate AnyLogger freely, with complete access to it's infrastructure. You can provide your own custom plugin and set it with [addPlugin](#anyloggeraddpluginplugin)
-
+```javascript
+anyLogger.addPlugin({create: function(anyLoggerClass, setting){
+	//do somthing
+}});
+```
 ## API
 ### AnyLogger.create(settingsObj)
 
