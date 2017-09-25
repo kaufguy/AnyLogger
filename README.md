@@ -68,7 +68,7 @@ AnyLogger.create(settings);
 | logToService (Max only)  | {loggingUrl:'', batchSize:integer,                                                                                                    flushOnWindowClose:boolean,                                                                                                              headers: [{'':''}]}                       | configure if to use Service handler (available only on                                                                                AnyLoggerMax) or not and set it's configuration |
 
 ## Demo
-Check out demoLight and demoMax to see AnyLogger in action.
+Check out [demoLight](#https://github.com/kaufguy/AnyLogger/tree/master/demoLight) and [demoMax](#https://github.com/kaufguy/AnyLogger/tree/master/demoMax) to see AnyLogger in action.
 
 ## Console Logging
 Default handler that logs messages to the console
