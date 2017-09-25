@@ -1,6 +1,6 @@
 AnyLoggerJS ![Build Status](https://travis-ci.org/kaufguy/AnyLogger.svg?branch=master)
 =======================
-AnyLogger is a simple open-source, no dependencies, JavaScript log tools, that can be extended and modified to fit most of your logging needs. AnyLogger is available in a lightweight (~1.8kb min+gzip) [anyLogger.js](https://github.com/kaufguy/AnyLogger/blob/master/dev/anyLogger.js) or extended [anyLoggerMax.js](https://github.com/kaufguy/AnyLogger/blob/master/dev/anyLoggerMax.js) versions.
+AnyLogger is a simple open-source, no dependencies, JavaScript logger library, that can be extended and modified to fit most of your logging needs. AnyLogger is available in a lightweight (~1.8kb min+gzip) [anyLogger.js](https://github.com/kaufguy/AnyLogger/blob/master/dev/anyLogger.js) or extended [anyLoggerMax.js](https://github.com/kaufguy/AnyLogger/blob/master/dev/anyLoggerMax.js) versions.
 
 ## Main Capabilities
 
