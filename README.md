@@ -45,7 +45,7 @@ Next, AnyLogger is ready to crate a logger instance and start logging. It comes 
 ```
 
 ## Demo
-Check out [demoLight](https://github.com/kaufguy/AnyLogger/tree/master/demoLight) and [demoMax](https://github.com/kaufguy/AnyLogger/tree/master/demoMax) to see AnyLogger in action.
+Check out this [demo page](https://kaufguy.github.io/AnyLogger/) or the folders [demoLight](https://github.com/kaufguy/AnyLogger/tree/master/demoLight) and [demoMax](https://github.com/kaufguy/AnyLogger/tree/master/demoMax) to see AnyLogger in action.
 
 ## Settings
 AnyLogger accept setup settings in the 'create' call. Most of the settings can be changed on a later stage using the [API](#api).
