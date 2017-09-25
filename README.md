@@ -1,7 +1,7 @@
 AnyLoggerJS ![Build Status](https://travis-ci.org/kaufguy/AnyLogger.svg?branch=master)
 =======================
 
-Simple JavaScript log tools, that can be extended and modified to fit most of your logging needs. AnyLogger is available in a lightweight (~1.7kb) anyLogger.js or extended anyLoggerMax.js versions.
+Simple JavaScript log tools, that can be extended and modified to fit most of your logging needs. AnyLogger is available in a lightweight (~1.7kb) [anyLogger.js](https://github.com/kaufguy/AnyLogger/blob/master/src/anyLogger.js) or extended [anyLoggerMax.js](https://github.com/kaufguy/AnyLogger/blob/master/src/anyLoggerMax.js) versions.
 
 ## Main Capabilities
 
@@ -17,8 +17,8 @@ Simple JavaScript log tools, that can be extended and modified to fit most of yo
 ## Table of Contents
 
 * [Quick Start](#quick-start)
-* [Settings](#settings)
 * [Demo](#demo)
+* [Settings](#settings)
 * [Console Logging](#console-logging)
 * [HTML Logging](#html-logging)
 * [Service Logging](#service-logging)
@@ -45,6 +45,9 @@ Next, AnyLogger is ready to crate a logger instance and start logging. It comes 
 </html>
 ```
 
+## Demo
+Check out [demoLight](https://github.com/kaufguy/AnyLogger/tree/master/demoLight) and [demoMax](https://github.com/kaufguy/AnyLogger/tree/master/demoMax) to see AnyLogger in action.
+
 ## Settings
 AnyLogger accept setup settings in the 'create' call. Most of the settings can be changed on a later stage using the [API](#api).
 ```javascript
@@ -66,9 +69,6 @@ AnyLogger.create(settings);
 | logToConsole             | boolean                                 | configure if to use the console handler or not          |
 | logToHtml (Max only)     | {container:''}                          | configure if to use the HTML handler (available only on AnyLoggerMax) or not and which HTML container to use |
 | logToService (Max only)  | {loggingUrl:'', batchSize:integer,                                                                                                    flushOnWindowClose:boolean,                                                                                                              headers: [{'':''}]}                       | configure if to use Service handler (available only on                                                                                AnyLoggerMax) or not and set it's configuration |
-
-## Demo
-Check out [demoLight](#https://github.com/kaufguy/AnyLogger/tree/master/demoLight) and [demoMax](#https://github.com/kaufguy/AnyLogger/tree/master/demoMax) to see AnyLogger in action.
 
 ## Console Logging
 Default handler that logs messages to the console
