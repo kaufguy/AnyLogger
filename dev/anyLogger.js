@@ -165,7 +165,7 @@
         parsedData = data || {};
         parsedData.module = parsedData.module || this.settings.module;
         parsedData.date = new Date();
-        if (message && this.formatter && !isCollected(data)) //don't format collected message
+        if (message && this.formatter)
         {
             message = this.formatter(message, parsedData);
         }
