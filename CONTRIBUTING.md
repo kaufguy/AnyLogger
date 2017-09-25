@@ -7,3 +7,4 @@
 5. Submit a pull request :D
 
 Don't edit files under `dist` and 'dev' folders, those are generated after running `grunt` command, edit files under `src` folder instead.
+Add unit tests to your feature under 'test' folder.
