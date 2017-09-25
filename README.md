@@ -1,7 +1,7 @@
 AnyLoggerJS ![Build Status](https://travis-ci.org/kaufguy/AnyLogger.svg?branch=master)
 =======================
 
-Simple JavaScript log tools, that can be extended and modified to fit most of your logging needs. AnyLogger is available in a lightweight (~1.7kb) [anyLogger.js](https://github.com/kaufguy/AnyLogger/blob/master/src/anyLogger.js) or extended [anyLoggerMax.js](https://github.com/kaufguy/AnyLogger/blob/master/src/anyLoggerMax.js) versions.
+Simple JavaScript log tools, that can be extended and modified to fit most of your logging needs. AnyLogger is available in a lightweight (~1.7kb) [anyLogger.js](https://github.com/kaufguy/AnyLogger/blob/master/dev/anyLogger.js) or extended [anyLoggerMax.js](https://github.com/kaufguy/AnyLogger/blob/master/dev/anyLoggerMax.js) versions.
 
 ## Main Capabilities
 
