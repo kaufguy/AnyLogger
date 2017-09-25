@@ -54,26 +54,26 @@ Check out demoLight and demoMax to see AnyLogger in action.
 Formatter is a simple function that recieves a string message and data object as input. It returns a formatted string message that will be used as an input message to the [handlers](#handlers). All non collected messages are routed through the formatter. AnyLogger comes with a default formatter that can be disabled with 'useFormatter' configuration.
 ```javascript
 logger.create({
-					formatter: function(message, data){return "[" + data.module + "][" + data.scope + "]" + message},
-					module: 'moduleName',
-					logLevel: 'debug',
-				});
+	formatter: function(message, data){return "[" + data.module + "][" + data.scope + "]" + message},
+	module: 'moduleName',
+	logLevel: 'debug',
+});
 ```
 ## Handlers
-Handlers are objects which provides a 'write' function that receives a string message, log level and data. According to configuration, log messages are routed through the handlers so they can do some logging work with them. Handlers can provide their own API that would be available when retriving their instance through [getHandlerByType](#anyloggergethandlerbytypetype). AnyLogger comes with one default 'console' handler and AnyLoggerMax also comes with 'html' and 'service' handlers. You can provide your own custom handler and set it with [addHandler](#anyloggeraddHandler) or with [settings](#settings). You can set the handler as a function or an object.
+Handlers are objects which provides a 'write' function that receives a string message, log level and data. According to configuration, log messages are routed through the handlers so they can do some logging work with them. Handlers can provide their own API that would be available when retriving their instance through [getHandlerByType](#anyloggergethandlerbytypetype). AnyLogger comes with one default 'console' handler and AnyLoggerMax also comes with 'html' and 'service' handlers. You can provide your own custom handler and set it with [addHandler](#anyloggeraddhandlerhandler) or with [settings](#settings). You can set the handler as a function or an object.
 ```javascript
 var loggerInst = logger.create({
-					handlers: [handlers: [function(message, level, data){console.debug(message)}],
-					module: 'moduleName',
-					logLevel: 'debug',
-				});
- loggerInst.addHandler({
-            type: 'customHandler',
-            write: function(message, level, data) {
-                //do somthing
-            },
-            APIfunc1: function(){//do somthing},
-        });
+	handlers: [handlers: [function(message, level, data){console.debug(message)}],
+	module: 'moduleName',
+	logLevel: 'debug',
+});
+loggerInst.addHandler({
+	type: 'customHandler',
+	write: function(message, level, data) {
+		//do somthing
+	},
+	apiFunc1: function(){//do somthing},
+});
 ```
 
 ## API
@@ -162,7 +162,7 @@ flush all the captured logs.
 adds an handler to log messages to.
     
   * #### Parameters
-    handler- object that contains the properties 'type': string of the handler type(name) and 'write': function that recieves a string message, log level and data.
+    [handler](#handlers)- object that contains the properties 'type': string of the handler type(name) and 'write': function that recieves a string message, log level and data.
     
 ### AnyLogger.getHandlerByType(type)
 
