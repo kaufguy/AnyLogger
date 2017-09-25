@@ -689,7 +689,7 @@
             }
             else
             {
-                var input = document.getElementById("logTableFilter");
+                var input = document.getElementById("log-table-filter");
                 filter = input.value;
             }
             filter = filter.toUpperCase();
@@ -718,7 +718,7 @@
             var tableStyle = document.createElement('style');
             logContainer.appendChild(tableStyle);
             tableStyle.innerHTML =
-                "#logTable{border-collapse: collapse; height: 100%; width: 100%; display: block;}" +
+                "#log-table{border-collapse: collapse; height: 100%; width: 100%; display: block;}" +
                 ".log-table-row td{border: 1px solid black;} " +
                 ".log-table-row:nth-child(even){background-color: #d3d3d3}" +
                 ".log-table-row:hover {background-color: #ffffe0}" +
@@ -729,24 +729,24 @@
                 ".log-table-header th[data-sorted-direction='descending']:after {border-top-color: inherit;margin-top: 8px;}" +
                 ".log-table-header th[data-sorted-direction='ascending']:after {border-bottom-color: inherit;margin-top: 3px;}" +
                 ".log-table-header th:after {content: ''; visibility: hidden;	display: inline-block; vertical-align: inherit; height: 0; width: 0; border-width: 5px;	border-style: solid; border-color: transparent;	margin-right: 1px; margin-left: 10px; float: right;}" +
-                "#logTableFilter {font-size: 16px; padding: 5px 5px 5px 10px; border: 1px solid #ddd; margin: 0 0 12px 0;}" +
-                "#logTableClear {padding: 4px 32px; display: inline-block; cursor: pointer; font-size: 16px; margin: 0 16px 12px 0}"
+                "#log-table-filter {font-size: 16px; padding: 5px 5px 5px 10px; border: 1px solid #ddd; margin: 0 0 12px 0;}" +
+                "#log-table-clear {padding: 4px 32px; display: inline-block; cursor: pointer; font-size: 16px; margin: 0 16px 12px 0}"
 
             var logTableClear = document.createElement('button');
             logTableClear.innerHTML = 'Clear'
-            logTableClear.setAttribute('id', 'logTableClear');
+            logTableClear.setAttribute('id', 'log-table-clear');
             logTableClear.addEventListener("click", clearTable);
             logContainer.appendChild(logTableClear);
 
             var logTableFilter = document.createElement('input');
             logTableFilter.setAttribute('type', 'text');
-            logTableFilter.setAttribute('id', 'logTableFilter');
+            logTableFilter.setAttribute('id', 'log-table-filter');
             logTableFilter.setAttribute('placeholder', 'Filter');
             logTableFilter.addEventListener("keyup", filterTable);
             logContainer.appendChild(logTableFilter);
 
             logTable = document.createElement('table');
-            logTable.id = "logTable";
+            logTable.id = "log-table";
             logTable.innerHTML = '<thead class="log-table-header"><tr><th>Order</th><th>Date</th><th>Module</th><th>Scope</th><th style="width:100%;">Message</th><th>Level</th></tr></thead><tbody class="log-table-body"></tbody>'
             logContainer.appendChild(logTable);
             logBody = logTable.tBodies[0];

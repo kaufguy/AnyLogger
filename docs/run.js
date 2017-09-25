@@ -32,8 +32,15 @@ loggerInst = AnyLogger.create({
             }
         }
     },
-    logToHtml: {container: document.getElementById('testContainer')},
+    logToHtml: {container: document.getElementById('test-container')},
     flushCapturedLogsOnError:{handlerTypes:['service'], logLevel: 'info'}
 });
 loggerInst.debug('hello', {scope:'scopeWorld', module: 'moduleWorld'});
 loggerInst.error('world', {scope:'scopeWorld', module: 'moduleWorld'});
+
+var log = function(){
+    loggerInst.debug(document.getElementById("text-to-log").value);
+}
+
+var logButton = document.getElementById("log-button");
+logButton.addEventListener("click", log);
