@@ -1,18 +1,34 @@
 AnyLoggerJS ![Build Status](https://travis-ci.org/kaufguy/AnyLogger.svg?branch=master)
 =======================
 
-Simple JavaScript log tools, that can be extended and modified to fit most of your logging needs.
+Simple JavaScript log tools, that can be extended and modified to fit most of your logging needs. AnyLogger is available in a lightweight (~1.7kb) anyLogger.js or extended anyLoggerMax.js versions.
+
+## Main Capabilities
+
+* [Console Logging](#consolelogging)
+* [HTML Logging](#htmllogging) (AnyLoggerMax only)
+* [Service Logging](#servicelogging) (AnyLoggerMax only)
+* [Global Log Collecting](#globallogcollecting)
+* [Formatter](#formatter)
+* [Handlers](#handlers)
+* Plugins
 
 ## Table of Contents
 
 * [Quick Start](#quick-start)
 * [Settings](#settings)
 * [Demo](#demo)
+* [Console Logging](#consolelogging)
+* [HTML Logging](#htmllogging)
+* [Service Logging](#servicelogging)
+* [Global Log Collecting](#globallogcollecting)
+* [Formatter](#formatter)
+* [Handlers](#handlers)
 * [API](#api)
 
 ## Quick Start
-Add AnyLogger or AnyLoggerMax file to your project and consume it through <script> or AMD loader.
-Next, AnyLogger is ready to crate a logger instance and start logging. It comes with default behavior, but you might want to add setup settings. See [Settings](#settings) for more information.
+Add AnyLogger or AnyLoggerMax file to your project and consume it through <script> or AMD / CommonJS loader.
+Next, AnyLogger is ready to crate a logger instance and start logging. It comes with default behavior, but you might want to add some setup [settings](#settings).
 
 ```html
 <html>
@@ -50,6 +66,18 @@ AnyLogger.create(settings);
 ## Demo
 Check out demoLight and demoMax to see AnyLogger in action.
 
+## Console Logging
+Default handler that logs messages to the console
+
+## HTML Logging
+Handler that logs to an HTML table that can be filtered, sorted and cleared. Very useful for mobile devices. only available in AnyLoggerMax.
+
+## Servie Logging
+Handler that logs to a server through an HTTP request. You can configure the service URL, request headers, batch size of the logs on each request and if to flush the remaining logs on window close event. Very useful for production monitoring. only available in AnyLoggerMax.
+
+## Global Log Collecting
+AnyLogger can collect global errors / exceptions (window.onerror) and console logs and route them through the handlers. Very useful for investigating environment / system related errors as well as unhandled code.
+
 ## Formatter
 Formatter is a simple function that recieves a string message and data object as input. It returns a formatted string message that will be used as an input message to the [handlers](#handlers). All non collected messages are routed through the formatter. AnyLogger comes with a default formatter that can be disabled with 'useFormatter' configuration.
 ```javascript
@@ -75,6 +103,8 @@ loggerInst.addHandler({
 	apiFunc1: function(){//do somthing},
 });
 ```
+## Plugins
+Plugins are module objects, which provides a 'create' function that recieves the AnyLogger class and the provided settings. Plugins can manipulate AnyLogger freely, with complete access to it's infrastructure. You can provide your own custom plugin and set it with [addPlugin](#anyloggeraddpluginplugin)
 
 ## API
 ### AnyLogger.create(settingsObj)
@@ -95,7 +125,7 @@ retrieves AnyLogger instance by id.
 registers a plugin class. 
 
   * #### Parameters
-    plugin - plugin object with create function. 
+    [plugin](#plugins) - plugin object with create function. 
     
 ## API - Instance
 
