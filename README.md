@@ -5,10 +5,10 @@ Simple JavaScript log tools, that can be extended and modified to fit most of yo
 
 ## Main Capabilities
 
-* [Console Logging](#consolelogging)
-* [HTML Logging](#htmllogging) (AnyLoggerMax only)
-* [Service Logging](#servicelogging) (AnyLoggerMax only)
-* [Global Log Collecting](#globallogcollecting)
+* [Console Logging](#console-logging)
+* [HTML Logging](#html-logging) (AnyLoggerMax only)
+* [Service Logging](#service-logging) (AnyLoggerMax only)
+* [Global Log Collecting](#global-log-collecting)
 * [Formatter](#formatter)
 * [Handlers](#handlers)
 * Plugins
@@ -18,10 +18,10 @@ Simple JavaScript log tools, that can be extended and modified to fit most of yo
 * [Quick Start](#quick-start)
 * [Settings](#settings)
 * [Demo](#demo)
-* [Console Logging](#consolelogging)
-* [HTML Logging](#htmllogging)
-* [Service Logging](#servicelogging)
-* [Global Log Collecting](#globallogcollecting)
+* [Console Logging](#console-logging)
+* [HTML Logging](#html-logging)
+* [Service Logging](#service-logging)
+* [Global Log Collecting](#global-log-collecting)
 * [Formatter](#formatter)
 * [Handlers](#handlers)
 * [API](#api)
