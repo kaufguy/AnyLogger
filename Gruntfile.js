@@ -21,6 +21,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'requirejs:dev',
         'requirejs:min',
-        'copy:docs'
+        'copy:docs',
+        'copy:demolight',
+        'copy:demomax'
     ]);
 };
