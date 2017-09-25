@@ -83,7 +83,7 @@ Handler that logs to a server through an HTTP request. You can configure the ser
 AnyLogger can collect global errors / exceptions (window.onerror) and console logs and route them through the handlers. Very useful for investigating environment / system related errors as well as unhandled code.
 
 ## Log Capture
-AnyLogger can store logs until it suites you to flush them with [flushCapturedLogs](#anyloggerflushcapturedlogsloglevel-handlertypes). You can configure the limit of how many logs to store using [captureLogsLimit](#anyloggercapturlogslimit) and if to flush them when the limit is reached [flushCapturedLogsOnLimit](#anyloggerflushcapturedlogsonlimitflushonlimit) or when en error level log is received [flushCapturedLogsOnError](#anyloggerflushcapturedlogsonlimitflushonerror). 
+AnyLogger can store logs until it suites you to flush them with [flushCapturedLogs](#anyloggerflushcapturedlogsloglevel-handlertypes). You can configure the limit of how many logs to store using [captureLogsLimit](#anyloggercapturlogslimit) and if to flush them when the limit is reached [flushCapturedLogsOnLimit](#anyloggerflushcapturedlogsonlimitflushonlimit) or when en error level log is received [flushCapturedLogsOnError](#anyloggerflushcapturedlogsonerrorflushonerror). 
 
 ## Formatter
 Formatter is a simple function that receives a string message and data object as input. It returns a formatted string message that will be used as an input message to the [handlers](#handlers). All non-collected messages are routed through the formatter. AnyLogger comes with a default formatter that can be disabled with 'useFormatter' configuration.
