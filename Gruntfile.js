@@ -20,6 +20,7 @@ module.exports = function (grunt) {
     grunt.registerTask('test', 'mocha_phantomjs');
     grunt.registerTask('build', [
         'requirejs:dev',
-        'requirejs:min'
+        'requirejs:min',
+        'copy:docs'
     ]);
 };
