@@ -264,11 +264,11 @@ define(['chai', 'sinon', '../dev/anyLoggerMax.js'], function(chai, sinon, logger
 				console.error('hello world5');
                 loggerInst.error('hello world6', {module:'module1', scope:'scope1'});
                 loggerInst.error('hello world7');
-				expect(loggerInst.getCapturedLogs()[0].message === 'hello world1').to.equal(true);
-				expect(loggerInst.getCapturedLogs()[1].message === 'hello world2').to.equal(true);
-				expect(loggerInst.getCapturedLogs()[2].message === 'hello world3').to.equal(true);
-				expect(loggerInst.getCapturedLogs()[3].message === 'hello world4').to.equal(true);
-				expect(loggerInst.getCapturedLogs()[4].message === 'hello world5').to.equal(true);
+				expect(loggerInst.getCapturedLogs()[0].message.indexOf('hello world1') > -1 ).to.equal(true);
+				expect(loggerInst.getCapturedLogs()[1].message.indexOf('hello world2') > -1).to.equal(true);
+				expect(loggerInst.getCapturedLogs()[2].message.indexOf('hello world3') > -1).to.equal(true);
+				expect(loggerInst.getCapturedLogs()[3].message.indexOf('hello world4') > -1).to.equal(true);
+				expect(loggerInst.getCapturedLogs()[4].message.indexOf('hello world5') > -1).to.equal(true);
                 expect(loggerInst.getCapturedLogs()[5].message.indexOf('[module1][scope1]hello world6') > -1).to.equal(true);
                 expect(loggerInst.getCapturedLogs()[6].message.indexOf('hello world7') > -1).to.equal(true);
                	loggerInst.flushCapturedLogs( 'error' ,['console', 'html'],function(count){
@@ -407,7 +407,7 @@ define(['chai', 'sinon', '../dev/anyLoggerMax.js'], function(chai, sinon, logger
                 console.error('hello world1');
                 loggerInst.error('hello world2', {module:'module1', scope:'scope1'});
                 loggerInst.error('hello world3');
-                expect(loggerInst.getCapturedLogs()[0].message === 'hello world1').to.equal(true);
+                expect(loggerInst.getCapturedLogs()[0].message.indexOf('hello world1') > -1).to.equal(true);
                 expect(loggerInst.getCapturedLogs()[1].message.indexOf('[module1][scope1]hello world2') > -1).to.equal(true);
                 expect(loggerInst.getCapturedLogs()[2].message.indexOf('hello world3') > -1).to.equal(true);
                 loggerInst.flushCapturedLogs( 'error' ,['html'],function(count){
